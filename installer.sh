@@ -8,7 +8,7 @@ clear
 # Undo previous stuff
 set +e
 umount -R /mnt
-cryptsetup close cryptroot
+# cryptsetup close cryptroot
 set -e
 
 # Partitioning disk
@@ -28,7 +28,7 @@ echo -e "\033[32mDisk partitioned successfully.\033[0m"
 # Creating filesystems
 echo -e "\n\033[1mCreating filesystems...\033[0m"
 mkfs.fat -F32 -n boot $DISK_BOOT_PARTITION
-mkfs.ext4 -F -L nix -m 0 /dev/mapper/cryptroot
+# mkfs.ext4 -F -L nix -m 0 /dev/mapper/cryptroot
 # Let mkfs catch its breath
 sleep 3
 echo -e "\033[32mFilesystems created successfully.\033[0m"
@@ -38,7 +38,7 @@ echo -e "\n\033[1mMounting filesystems...\033[0m"
 mount -t tmpfs none /mnt
 mkdir -pv /mnt/{boot,nix,etc/ssh,var/{lib,log}}
 mount /dev/disk/by-label/boot /mnt/boot
-mount /dev/disk/by-label/nix /mnt/nix
+# mount /dev/disk/by-label/nix /mnt/nix
 mkdir -pv /mnt/nix/{secret/initrd,persist/{etc/ssh,var/{lib,log}}}
 chmod 0700 /mnt/nix/secret
 mount -o bind /mnt/nix/persist/var/log /mnt/var/log
