@@ -64,7 +64,7 @@
     # Created using mkpasswd
     hashedPassword = "$6$485aln9uSLRPVjcA$BOZJAKC4TjYBSJxx86dPxFIUu79ccapg2ky.vLiPSSaF.D4I0B4xY52B3kSvRI1Xnb4JnxhF5A1K9WOXXt632.";
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
     ];
   };
 
