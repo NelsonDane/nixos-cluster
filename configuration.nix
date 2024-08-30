@@ -16,6 +16,7 @@
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
+    age.keyFile = ./keys.txt;
   };
 
   # Use the systemd-boot EFI boot loader.
