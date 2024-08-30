@@ -97,6 +97,21 @@
     "10.0.1.211" = ["node-2"];
     "10.0.1.212" = ["node-3"];
   };
+  # Set Static IPs
+  networking.interfaces.enp6s18.useDHCP = false;
+  networking.defaultGateway = "10.0.1.1";
+  networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
+  networking.interfaces.enp6s18.ipv4.addresses =
+    if meta.hostname == "node-1" then [{
+      address = "10.0.1.210";
+      prefixLength = 24;
+    }] else if meta.hostname == "node-2" then [{
+      address = "10.0.1.211";
+      prefixLength = 24;
+    }] else if meta.hostname == "node-3" then [{
+      address = "10.0.1.212";
+      prefixLength = 24;
+    }] else [];
 
   system.stateVersion = "24.05";
 
