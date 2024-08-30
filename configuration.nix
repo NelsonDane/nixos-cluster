@@ -88,6 +88,11 @@
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
+  networking.hosts = {
+    "node-1" = "10.0.1.210";
+    "node-2" = "10.0.1.211";
+    "node-3" = "10.0.1.212";
+  };
 
   system.stateVersion = "24.05";
 
