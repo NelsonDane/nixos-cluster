@@ -59,7 +59,6 @@
 	    "--disable servicelb"
 	    "--disable traefik"
 	    "--disable local-storage"
-      "--rootless"
     ] ++ (if meta.hostname == "node-1" then [] else [
 	      "--server https://node-1:6443"
     ]));
