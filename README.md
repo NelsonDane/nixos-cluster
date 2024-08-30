@@ -13,7 +13,9 @@ Uses keys generated at creation. Convert to age:
 nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
 nix-shell -p sops --run "SOPS_AGE_KEY_FILE=./keys.txt sops updatekeys secrets/secrets.yaml"
 
+SH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere -- --flake '.#node-3' root@10.0.1.212
+
 sudo nixos-rebuild switch --flake '.#node-1'
 
 Then on node 1:
-nixos-rebuild switch --flake '.#node-2' --target-host cluster@10.0.1.211
+sudo nixos-rebuild switch --flake '.#node-2' --target-host cluster@10.0.1.211

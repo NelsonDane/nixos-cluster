@@ -97,6 +97,23 @@
     "10.0.1.211" = ["node-2"];
     "10.0.1.212" = ["node-3"];
   };
+  # Set IPs for the nodes
+  let
+    ipconfig = if meta.hostname == "node-1" then {
+      networking.interfaces.enp6s18.ipv4.addresses = [
+        { address = "10.0.1.210"; prefixLength = 24; }
+      ];
+    } else if meta.hostname == "node-2" then {
+      networking.interfaces.enp6s18.ipv4.addresses = [
+        { address = "10.0.1.211"; prefixLength = 24; }
+      ];
+    } else if meta.hostname == "node-3" then {
+      networking.interfaces.enp6s18.ipv4.addresses = [
+        { address = "10.0.1.212"; prefixLength = 24; }
+      ];
+    } else {};
+  in
+    ipconfig;
 
   system.stateVersion = "24.05";
 
