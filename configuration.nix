@@ -16,7 +16,11 @@
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "./keys.txt";
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.generateKey = true;
+    # Secrets
+    secrets."rancher_token" = {};
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -44,7 +48,6 @@
   ];
   virtualisation.docker.logDriver = "json-file";
 
-  sops.secrets."rancher_token" = {};
   services.k3s = {
     enable = true;
     role = "server";
@@ -69,7 +72,7 @@
   users.users.cluster = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    # Created using mkpasswd
+    # Created using mkpasswd -m sha-512
     hashedPassword = "$6$485aln9uSLRPVjcA$BOZJAKC4TjYBSJxx86dPxFIUu79ccapg2ky.vLiPSSaF.D4I0B4xY52B3kSvRI1Xnb4JnxhF5A1K9WOXXt632.";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
@@ -88,11 +91,11 @@
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
-  networking.hosts = {
-    "10.0.1.210" = ["node-1"];
-    "10.0.1.211" = ["node-2"];
-    "10.0.1.212" = ["node-3"];
-  };
+  # networking.hosts = {
+  #   "10.0.1.210" = ["node-1"];
+  #   "10.0.1.211" = ["node-2"];
+  #   "10.0.1.212" = ["node-3"];
+  # };
 
   system.stateVersion = "24.05";
 
