@@ -97,16 +97,6 @@
     "10.0.1.211" = ["node-2"];
     "10.0.1.212" = ["node-3"];
   };
-  # Set IPs for the nodes
-  {
-    networking.interfaces.enp6s18.ipv4.addresses = lib.mkIf (meta.hostname == "node-1") [
-      { address = "10.0.1.210"; prefixLength = 24; }
-    ] ++ lib.mkIf (meta.hostname == "node-2") [
-      { address = "10.0.1.211"; prefixLength = 24; }
-    ] ++ lib.mkIf (meta.hostname == "node-3") [
-      { address = "10.0.1.212"; prefixLength = 24; }
-    ];
-  }
 
   system.stateVersion = "24.05";
 
