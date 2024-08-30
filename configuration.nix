@@ -60,7 +60,7 @@
 	    "--disable traefik"
 	    "--disable local-storage"
     ] ++ (if meta.hostname == "node-1" then [] else [
-	      "--server https://node-1:6443"
+	      "--server http://node-1:6443"
     ]));
     clusterInit = (meta.hostname == "node-1");
   };
@@ -92,11 +92,11 @@
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
-  # networking.hosts = {
-  #   "10.0.1.210" = ["node-1"];
-  #   "10.0.1.211" = ["node-2"];
-  #   "10.0.1.212" = ["node-3"];
-  # };
+  networking.hosts = {
+    "10.0.1.210" = ["node-1"];
+    "10.0.1.211" = ["node-2"];
+    "10.0.1.212" = ["node-3"];
+  };
 
   system.stateVersion = "24.05";
 
