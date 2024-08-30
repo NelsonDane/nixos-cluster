@@ -11,6 +11,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    trustedUsers = [ "root" "@wheel" ];
   };
 
   sops = {
