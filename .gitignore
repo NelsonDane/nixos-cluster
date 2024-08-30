@@ -1,3 +1,4 @@
 *.iso
 result
 nixos_cluster*
+keys.txt

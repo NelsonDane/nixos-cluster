@@ -5,10 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    # sops-nix = {
-    #   url = "github:Mic92/sops-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, disko, ... }@inputs: let
@@ -22,6 +22,7 @@
 	    name = name;
 	    value = nixpkgs.lib.nixosSystem {
      	    specialArgs = {
+            inherit inputs;
             meta = { hostname = name; };
           };
           system = "x86_64-linux";

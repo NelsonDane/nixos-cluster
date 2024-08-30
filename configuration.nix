@@ -1,8 +1,9 @@
-{ config, lib, pkgs, meta, ... }:
+{ inputs, config, lib, pkgs, meta, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      inputs.sops-nix.nixosModules.sops
     ];
 
   nix = {
@@ -10,6 +11,11 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -37,10 +43,11 @@
   ];
   virtualisation.docker.logDriver = "json-file";
 
+  sops.secrets."rancher_token" = {};
   services.k3s = {
     enable = true;
     role = "server";
-    tokenFile = /var/lib/rancher/k3s/server/token;
+    tokenFile = config.sops.secrets."rancher_token".path; 
     extraFlags = toString ([
 	    "--write-kubeconfig-mode \"0644\""
 	    "--cluster-init"
