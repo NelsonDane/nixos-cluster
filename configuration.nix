@@ -59,8 +59,9 @@
 	    "--disable servicelb"
 	    "--disable traefik"
 	    "--disable local-storage"
+      "--rootless"
     ] ++ (if meta.hostname == "node-1" then [] else [
-	      "--server http://node-1:6443"
+	      "--server https://node-1:6443"
     ]));
     clusterInit = (meta.hostname == "node-1");
   };
