@@ -74,7 +74,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     # Created using mkpasswd -m sha-512
-    hashedPassword = "$6$485aln9uSLRPVjcA$BOZJAKC4TjYBSJxx86dPxFIUu79ccapg2ky.vLiPSSaF.D4I0B4xY52B3kSvRI1Xnb4JnxhF5A1K9WOXXt632.";
+    hashedPassword = "$6$zBd4jLFLxMSwywE/$zoEu2GfCM/z3qq4cdRGdHM84CpuGSSVMMqFwy2xv8r2jCmp6VtiDjry6ILaG5aObV.d/yD41zPWfwFBBaX2LB/";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
     ];
@@ -96,7 +96,14 @@
   ];
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
+  security.pam = {
+    sshAgentAuth.enable = true;
+    services.sudo.sshAgentAuth = true;
+  };
 
   networking.firewall.enable = false;
   networking.hosts = {

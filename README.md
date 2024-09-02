@@ -45,7 +45,7 @@ sudo nixos-rebuild switch --flake '.#node-NUMBER'
 
 Then to update each node in the cluster:
 ```bash
-sudo nixos-rebuild switch --flake '.#node-NUMBER' --target-host cluster@node-NUMBER
+nixos-rebuild switch --flake '.#node-NUMBER' --use-remote-sudo --target-host cluster@node-NUMBER
 ```
 This will also update secrets on each node.
 
