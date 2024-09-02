@@ -96,10 +96,7 @@
   ];
 
   # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
+  services.openssh.enable = true;
   security.pam = {
     sshAgentAuth.enable = true;
     services.sudo.sshAgentAuth = true;
