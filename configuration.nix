@@ -113,7 +113,7 @@
   # Set Static IPs
   networking.interfaces.enp6s18.useDHCP = false;
   networking.defaultGateway = "10.0.1.1";
-  networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
+  networking.nameservers = [ "10.0.1.3" ];
   networking.interfaces.enp6s18.ipv4.addresses =
     if meta.hostname == "node-1" then [{
       address = "10.0.1.210";
