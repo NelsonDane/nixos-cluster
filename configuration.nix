@@ -80,7 +80,7 @@
     ];
   };
   security.sudo.extraRules = [{
-      users = "cluster";
+      users = ["cluster"];
       commands = [{
         command = "ALL";
         options = ["NOPASSWD" "SETENV"];
