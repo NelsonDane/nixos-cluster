@@ -33,7 +33,7 @@ Make sure you have `nix` installed locally. Then:
 2. Add the new node to the `nodes` list in `flake.nix`.
 3. Execute the following command:
 ```bash
-SH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#node-NUMBER' root@IP_ADDRESS
+SSH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#node-NUMBER' root@IP_ADDRESS
 ```
 4. Copy the outputted `age` key to the `.sops.yaml` file. See [Secrets Management](#secrets-management) for more information.
 

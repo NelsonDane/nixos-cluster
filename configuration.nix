@@ -96,6 +96,8 @@
     "10.0.1.210" = ["node-1"];
     "10.0.1.211" = ["node-2"];
     "10.0.1.212" = ["node-3"];
+    "10.0.1.213" = ["node-4"];
+    "10.0.1.214" = ["node-5"];
   };
   # Set Static IPs
   networking.interfaces.enp6s18.useDHCP = false;
@@ -110,6 +112,12 @@
       prefixLength = 24;
     }] else if meta.hostname == "node-3" then [{
       address = "10.0.1.212";
+      prefixLength = 24;
+    }] else if meta.hostname == "node-4" then [{
+      address = "10.0.1.213";
+      prefixLength = 24;
+    }] else if meta.hostname == "node-5" then [{
+      address = "10.0.1.214";
       prefixLength = 24;
     }] else [];
 
