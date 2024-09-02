@@ -79,6 +79,13 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
     ];
   };
+  security.sudo.extraRules = [{
+      users = "cluster";
+      commands = [{
+        command = "ALL";
+        options = ["NOPASSWD" "SETENV"];
+      }];
+  }];
 
   environment.systemPackages = with pkgs; [
      vim
