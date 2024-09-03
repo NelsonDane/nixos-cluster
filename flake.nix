@@ -20,11 +20,6 @@
       { name = "node-4"; ip = "10.0.1.53"; }
       { name = "node-5"; ip = "10.0.1.54"; }
     ];
-    # Set hosts so nodes can talk to each other
-    networking.hosts = builtins.listToAttrs (map (node: {
-      name = node.name;
-      value = [ node.ip ];
-    }) nodes);
   in {
     nixosConfigurations = builtins.listToAttrs (map (node: {
       name = node.name;
@@ -34,6 +29,7 @@
             meta = {
               hostname = node.name;
               ip_address = node.ip;
+              all_nodes = nodes;
             };
           };
           system = "x86_64-linux";
