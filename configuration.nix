@@ -103,34 +103,38 @@
   };
 
   networking.firewall.enable = false;
-  networking.hosts = {
-    "10.0.1.210" = ["node-1"];
-    "10.0.1.211" = ["node-2"];
-    "10.0.1.212" = ["node-3"];
-    "10.0.1.213" = ["node-4"];
-    "10.0.1.214" = ["node-5"];
-  };
-  # Set Static IPs
+  # networking.hosts = {
+  #   "10.0.1.210" = ["node-1"];
+  #   "10.0.1.211" = ["node-2"];
+  #   "10.0.1.212" = ["node-3"];
+  #   "10.0.1.213" = ["node-4"];
+  #   "10.0.1.214" = ["node-5"];
+  # };
+  # # Set Static IP
   networking.interfaces.enp6s18.useDHCP = false;
   networking.defaultGateway = "10.0.1.1";
-  networking.nameservers = [ "10.0.1.3" ];
-  networking.interfaces.enp6s18.ipv4.addresses =
-    if meta.hostname == "node-1" then [{
-      address = "10.0.1.210";
-      prefixLength = 24;
-    }] else if meta.hostname == "node-2" then [{
-      address = "10.0.1.211";
-      prefixLength = 24;
-    }] else if meta.hostname == "node-3" then [{
-      address = "10.0.1.212";
-      prefixLength = 24;
-    }] else if meta.hostname == "node-4" then [{
-      address = "10.0.1.213";
-      prefixLength = 24;
-    }] else if meta.hostname == "node-5" then [{
-      address = "10.0.1.214";
-      prefixLength = 24;
-    }] else [];
+  networking.nameservers = [ "10.0.1.3" "1.1.1.1" "9.9.9.9" ];
+  networking.interfaces.enp6s18.ipv4.addresses = [{
+    address = meta.ip_address;
+    prefixLength = 24;
+  }];
+  # networking.interfaces.enp6s18.ipv4.addresses =
+  #   if meta.hostname == "node-1" then [{
+  #     address = "10.0.1.210";
+  #     prefixLength = 24;
+  #   }] else if meta.hostname == "node-2" then [{
+  #     address = "10.0.1.211";
+  #     prefixLength = 24;
+  #   }] else if meta.hostname == "node-3" then [{
+  #     address = "10.0.1.212";
+  #     prefixLength = 24;
+  #   }] else if meta.hostname == "node-4" then [{
+  #     address = "10.0.1.213";
+  #     prefixLength = 24;
+  #   }] else if meta.hostname == "node-5" then [{
+  #     address = "10.0.1.214";
+  #     prefixLength = 24;
+  #   }] else [];
 
   system.stateVersion = "24.05";
 

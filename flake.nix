@@ -12,20 +12,29 @@
   };
 
   outputs = { self, nixpkgs, disko, ... }@inputs: let
+    # Define cluster nodes/IPs
     nodes = [
-      "node-1"
-      "node-2"
-      "node-3"
-      "node-4"
-      "node-5"
+      { name = "node-1"; ip = "10.0.1.50"; }
+      { name = "node-2"; ip = "10.0.1.51"; }
+      { name = "node-3"; ip = "10.0.1.52"; }
+      { name = "node-4"; ip = "10.0.1.53"; }
+      { name = "node-5"; ip = "10.0.1.54"; }
     ];
+    # Set hosts so nodes can talk to each other
+    networking.hosts = builtins.listToAttrs (map (node: {
+      name = node.name;
+      value = [ node.ip ];
+    }) nodes);
   in {
-    nixosConfigurations = builtins.listToAttrs (map (name: {
-	    name = name;
+    nixosConfigurations = builtins.listToAttrs (map (node: {
+      name = node.name;
 	    value = nixpkgs.lib.nixosSystem {
      	    specialArgs = {
             inherit inputs;
-            meta = { hostname = name; };
+            meta = {
+              hostname = node.name;
+              ip_address = node.ip;
+            };
           };
           system = "x86_64-linux";
           modules = [
