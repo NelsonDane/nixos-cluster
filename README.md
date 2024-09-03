@@ -20,6 +20,11 @@ nix-shell -p ssh-to-age --run 'cat /YOUR/KEY/PATH.pub | ssh-to-age'
 ```
 Then add the output to the `.sops.yaml` file.
 
+To create a `keys.txt` for local development, run the following command:
+```bash
+nix run nixpkgs#ssh-to-age -- -private-key -i ~/YOUR/KEY/PATH > keys.txt
+```
+
 To update keys across all nodes, commmit the changes to the `.sops.yaml` file, and run the following command:
 ```bash
 nix-shell -p sops --run "SOPS_AGE_KEY_FILE=./keys.txt sops updatekeys secrets/secrets.yaml"
@@ -29,13 +34,12 @@ update flake: nix flake update
 
 ## Adding a New Node
 Make sure you have `nix` installed locally. Then:
-1. Add the new IP in `configuration.nix`.
-2. Add the new node to the `nodes` list in `flake.nix`.
-3. Execute the following command:
+1. Add the new node and its IP to the in `flake.nix`.
+2. Execute the following command:
 ```bash
 SSH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#node-NUMBER' root@IP_ADDRESS
 ```
-4. Copy the outputted `age` key to the `.sops.yaml` file. See [Secrets Management](#secrets-management) for more information.
+3. Copy the outputted `age` key to the `.sops.yaml` file. See [Secrets Management](#secrets-management) for more information.
 
 ## Updating the Cluster with New/Changed Configuration
 You need at least one node with the repository cloned. Then, to update the current node:

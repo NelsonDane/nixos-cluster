@@ -103,15 +103,9 @@
   };
 
   networking.firewall.enable = false;
-  # networking.hosts = {
-  #   "10.0.1.210" = ["node-1"];
-  #   "10.0.1.211" = ["node-2"];
-  #   "10.0.1.212" = ["node-3"];
-  #   "10.0.1.213" = ["node-4"];
-  #   "10.0.1.214" = ["node-5"];
-  # };
   networking.hosts = builtins.listToAttrs (map (node: {
-    "${node.ip}" = [ node.name ];
+   name = node.ip;
+   value = [ node.name ];
   }) meta.all_nodes);
   # # Set Static IP
   networking.interfaces.enp6s18.useDHCP = false;
