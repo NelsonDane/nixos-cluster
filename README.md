@@ -30,8 +30,6 @@ To update keys across all nodes, commmit the changes to the `.sops.yaml` file, a
 nix-shell -p sops --run "SOPS_AGE_KEY_FILE=./keys.txt sops updatekeys secrets/secrets.yaml"
 ```
 
-update flake: nix flake update
-
 ## Adding a New Node
 Make sure you have `nix` installed locally. Then:
 1. Add the new node and its IP to the in `flake.nix`.
@@ -49,9 +47,11 @@ sudo nixos-rebuild switch --flake '.#node-NUMBER'
 
 Then to update each node in the cluster:
 ```bash
-nixos-rebuild switch --flake '.#node-NUMBER' --use-remote-sudo --target-host cluster@node-NUMBER
+sudo nixos-rebuild switch --flake '.#node-NUMBER' --use-remote-sudo --target-host cluster@node-NUMBER
 ```
 This will also update secrets on each node.
+
+All nodes can ssh into each other using the included `ssh_config`. There is a key located in `.sops.yaml` that is available at `/run/secrets/cluster_talk`.
 
 ## Update NixOS
 To update NixOS on all nodes, run the following command:
