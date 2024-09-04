@@ -22,6 +22,7 @@
     age.generateKey = true;
     # Secrets
     secrets."rancher_token" = {};
+    secrets."cluster_talk" = {};
   };
 
   # Use the systemd-boot EFI boot loader.
