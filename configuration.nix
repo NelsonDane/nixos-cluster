@@ -108,6 +108,11 @@
     sshAgentAuth.enable = true;
     services.sudo.sshAgentAuth = true;
   };
+  programs.ssh.extraConfig = ''
+    Host 10.0.1.5? node-*
+      user cluster
+      IdentityFile /run/secrets/cluster_talk
+  '';
 
   networking.firewall.enable = false;
   networking.hosts = builtins.listToAttrs (map (node: {
