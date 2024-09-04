@@ -113,6 +113,7 @@
       user cluster
       IdentityFile /run/secrets/cluster_talk
   '';
+  programs.nix-ld.enable = true;
 
   networking.firewall.enable = false;
   networking.hosts = builtins.listToAttrs (map (node: {
