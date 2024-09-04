@@ -97,8 +97,13 @@
      git
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # Enable ssh
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = "no";
+  };
   security.pam = {
     sshAgentAuth.enable = true;
     services.sudo.sshAgentAuth = true;
