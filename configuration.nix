@@ -65,10 +65,10 @@
     clusterInit = (meta.hostname == "node-1");
   };
 
-  # services.openiscsi = {
-  #   enable = true;
-  #   name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
-  # };
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
+  };
 
   users.users.cluster = {
     isNormalUser = true;
@@ -76,7 +76,8 @@
     # Created using mkpasswd -m sha-512
     hashedPassword = "$6$zBd4jLFLxMSwywE/$zoEu2GfCM/z3qq4cdRGdHM84CpuGSSVMMqFwy2xv8r2jCmp6VtiDjry6ILaG5aObV.d/yD41zPWfwFBBaX2LB/";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6" # nixos_cluster
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFt/JQChYMGqIq1L7qLf/miHap0bMaEs/16b157Fq/Bv" # cluster_talk
     ];
   };
   security.sudo.extraRules = [{
