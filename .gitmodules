@@ -1,0 +1,3 @@
+[submodule "helm/slurm-k8s-cluster"]
+	path = helm/slurm-k8s-cluster
+	url = https://github.com/NelsonDane/slurm-k8s-cluster.git
