@@ -13,6 +13,7 @@
     '';
     settings.trusted-users = [ "root" "@wheel" ];
   };
+  nixpkgs.config.allowUnfree = true;
 
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
@@ -65,7 +66,6 @@
     ]));
     clusterInit = (meta.hostname == "node-1");
   };
-
   services.openiscsi = {
     enable = true;
     name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
@@ -90,12 +90,33 @@
   }];
 
   environment.systemPackages = with pkgs; [
-     vim
-     k3s
-     cifs-utils
-     nfs-utils
-     git
+    vim
+    k3s
+    cifs-utils
+    nfs-utils
+    git
+    helm
+    helmfile
+    (wrapHelm kubernetes-helm {
+        plugins = with pkgs.kubernetes-helmPlugins; [
+          helm-diff
+        ];
+      })
   ];
+  environment = {
+    variables = {
+      KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+    };
+    interactiveShellInit = ''
+      alias c="clear"
+      alias k="kubectl"
+      alias h="helm"
+      alias hf="helmfile"
+    '';
+  };
+  # system.activationScripts.chmod = ''
+  #   sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+  # '';
 
   # Enable ssh
   services.openssh = {
