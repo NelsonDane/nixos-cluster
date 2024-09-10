@@ -18,11 +18,11 @@
             users.users.root.openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINFAapmuD0l/rfYUK1fpfgDkrEPQQF2skVLRsmN6P/r6"
             ];
-            networking.interfaces.enp6s18.useDHCP = false;
-            networking.defaultGateway = "10.0.1.1";
+            networking.interfaces.eno1.useDHCP = false;
+            networking.defaultGateway = "192.168.100.1";
             networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
-            networking.interfaces.enp6s18.ipv4.addresses = [ {
-              address = "10.0.1.199";
+            networking.interfaces.eno1.ipv4.addresses = [ {
+              address = "192.168.100.199";
               prefixLength = 24;
             } ];
           })

@@ -6,7 +6,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - 10.0.1.100-10.0.1.200
+    - 192.168.100.80-192.168.100.100
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement

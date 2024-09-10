@@ -27,10 +27,10 @@
   };
 
   # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
   boot.initrd.systemd.enable = true;
 
   networking.hostName = meta.hostname;
@@ -61,10 +61,10 @@
 	    "--disable servicelb"
 	    "--disable traefik"
 	    "--disable local-storage"
-    ] ++ (if meta.hostname == "node-1" then [] else [
-	      "--server https://node-1:6443"
+    ] ++ (if meta.hostname == "cluster-node-1" then [] else [
+	      "--server https://cluster-node-1:6443"
     ]));
-    clusterInit = (meta.hostname == "node-1");
+    clusterInit = (meta.hostname == "cluster-node-1");
   };
   services.openiscsi = {
     enable = true;
@@ -130,7 +130,7 @@
     services.sudo.sshAgentAuth = true;
   };
   programs.ssh.extraConfig = ''
-    Host 10.0.1.5? node-*
+    Host 192.168.100.1? cluster-node-*
       user cluster
       IdentityFile /run/secrets/cluster_talk
   '';
@@ -142,10 +142,10 @@
    value = [ node.name ];
   }) meta.all_nodes);
   # # Set Static IP
-  networking.interfaces.enp6s18.useDHCP = false;
-  networking.defaultGateway = "10.0.1.1";
-  networking.nameservers = [ "10.0.1.3" "1.1.1.1" "9.9.9.9" ];
-  networking.interfaces.enp6s18.ipv4.addresses = [{
+  networking.interfaces.eno1.useDHCP = false;
+  networking.defaultGateway = "192.168.100.1";
+  networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
+  networking.interfaces.eno1.ipv4.addresses = [{
     address = meta.ip_address;
     prefixLength = 24;
   }];

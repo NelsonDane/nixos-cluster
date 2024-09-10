@@ -14,11 +14,9 @@
   outputs = { self, nixpkgs, disko, ... }@inputs: let
     # Define cluster nodes/IPs
     nodes = [
-      { name = "node-1"; ip = "10.0.1.50"; }
-      { name = "node-2"; ip = "10.0.1.51"; }
-      { name = "node-3"; ip = "10.0.1.52"; }
-      { name = "node-4"; ip = "10.0.1.53"; }
-      { name = "node-5"; ip = "10.0.1.54"; }
+      { name = "cluster-node-1"; ip = "192.168.100.10"; }
+      { name = "cluster-node-2"; ip = "192.168.100.11"; }
+      { name = "cluster-node-3"; ip = "192.168.100.12"; }
     ];
   in {
     nixosConfigurations = builtins.listToAttrs (map (node: {

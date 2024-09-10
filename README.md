@@ -35,19 +35,19 @@ Make sure you have `nix` installed locally. Then:
 1. Add the new node and its IP to the in `flake.nix`.
 2. Execute the following command:
 ```bash
-SSH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#node-NUMBER' root@IP_ADDRESS
+SSH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#cluster-node-NUMBER' root@IP_ADDRESS
 ```
 3. Copy the outputted `age` key to the `.sops.yaml` file. See [Secrets Management](#secrets-management) for more information.
 
 ## Updating the Cluster with New/Changed Configuration
 You need at least one node with the repository cloned. Then, to update the current node:
 ```bash
-sudo nixos-rebuild switch --flake '.#node-NUMBER'
+sudo nixos-rebuild switch --flake '.#cluster-node-NUMBER'
 ```
 
 Then to update each node in the cluster:
 ```bash
-sudo nixos-rebuild switch --flake '.#node-NUMBER' --use-remote-sudo --target-host cluster@node-NUMBER
+sudo nixos-rebuild switch --flake '.#cluster-node-NUMBER' --use-remote-sudo --target-host cluster@cluster-node-NUMBER
 ```
 This will also update secrets on each node.
 
