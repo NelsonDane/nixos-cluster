@@ -1,9 +1,11 @@
 keys:
   - &nlaptop age108xqmsshksap8695ewy48pfdhw7kx5k9dgp8pxzx5tqdwlu6naksweyfc3
   - &node1 age18lu79lcspn67c05zmglt5036jh6d270nhne76t4e3u64wwu8qejsdyk4k6
+  - &node2 age17fljhj2fkjw2cjvymq22494a3t3chqtj3evhwn0rxwz0vke3sd0qzq2c2h
 creation_rules:
   - path_regex: secrets/.*\.yaml
     key_groups:
       - age:
         - *nlaptop
         - *node1
+        - *node2

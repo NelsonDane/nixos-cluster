@@ -37,7 +37,11 @@ Make sure you have `nix` installed locally. Then:
 ```bash
 SSH_PRIVATE_KEY="$(cat ./nixos_cluster)"$'\n' nix run github:nix-community/nixos-anywhere --extra-experimental-features "nix-command flakes" -- --flake '.#cluster-node-NUMBER' root@IP_ADDRESS
 ```
-3. Copy the outputted `age` key to the `.sops.yaml` file. See [Secrets Management](#secrets-management) for more information.
+3. Once the node boots, run:
+```bash
+nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
+```
+Copy the outputted `age` key to the `.sops.yaml` file and regenerate secrets, then update the node. See [Secrets Management](#secrets-management) for more information.
 
 ## Updating the Cluster with New/Changed Configuration
 You need at least one node with the repository cloned. Then, to update the current node:
