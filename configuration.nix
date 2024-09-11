@@ -92,6 +92,7 @@
   environment.systemPackages = with pkgs; [
     vim
     k3s
+    openiscsi
     cifs-utils
     nfs-utils
     git
