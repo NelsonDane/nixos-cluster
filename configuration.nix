@@ -61,10 +61,10 @@
 	    "--disable servicelb"
 	    "--disable traefik"
 	    "--disable local-storage"
-    ] ++ (if meta.hostname == "cluster-node-1" then [] else [
-	      "--server https://cluster-node-1:6443"
+    ] ++ (if meta.hostname == "cluster-node-0" then [] else [
+	      "--server https://cluster-node-0:6443"
     ]));
-    clusterInit = (meta.hostname == "cluster-node-1");
+    clusterInit = (meta.hostname == "cluster-node-0");
   };
   services.openiscsi = {
     enable = true;
