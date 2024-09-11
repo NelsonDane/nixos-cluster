@@ -4,6 +4,8 @@ keys:
   - &node1 age17fljhj2fkjw2cjvymq22494a3t3chqtj3evhwn0rxwz0vke3sd0qzq2c2h
   - &node2 age1xneuqq7x7aq5ftv2vzs58vz2ch33sczdnpzyj6jk9c29s3w6743ssncllu
   - &node3 age1rvf2hzwqlqq9ff8v24rgxuunmtus23yry22xzxsktzfc27sl8d2sg9glaf
+  - &node4 age1mtngej5qtyh36gahn5m3zs0ryd99yt2r276ayvs2exc8zysrvcyquj84nz
+  - &node5 age1a4egwvg4r0fh0hemxr4kna533q8scyy9m2az3lphk687m2ez23kqjjlc8q
 creation_rules:
   - path_regex: secrets/.*\.yaml
     key_groups:
@@ -13,3 +15,5 @@ creation_rules:
         - *node1
         - *node2
         - *node3
+        - *node4
+        - *node5
