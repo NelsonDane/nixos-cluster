@@ -61,6 +61,7 @@
 	    "--disable servicelb"
 	    "--disable traefik"
 	    "--disable local-storage"
+      "--disable servicelb"
     ] ++ (if meta.hostname == "cluster-node-0" then [] else [
 	      "--server https://cluster-node-0:6443"
     ]));
