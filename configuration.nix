@@ -12,6 +12,11 @@
       experimental-features = nix-command flakes
     '';
     settings.trusted-users = [ "root" "@wheel" ];
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 7d";
+    };
   };
   nixpkgs.config.allowUnfree = true;
 
