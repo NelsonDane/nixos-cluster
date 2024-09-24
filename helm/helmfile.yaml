@@ -5,6 +5,8 @@ repositories:
     url: https://metallb.github.io/metallb
   - name: ingress-nginx
     url: https://kubernetes.github.io/ingress-nginx
+  - name: k8s-ssh-bastion
+    url: https://nefelim4ag.github.io/k8s-ssh-bastion/
 
 releases:
   # Distributed storage
@@ -17,3 +19,17 @@ releases:
     namespace: metallb-system
     chart: metallb/metallb
     version: 0.14.5
+  # Ingress for local network
+  - name: ingress-nginx-internal
+    namespace: nginx-system
+    chart: ingress-nginx/ingress-nginx
+    version: 4.11.2
+    values:
+      - ./values/nginx-internal.yaml
+  # SSH Jumpbox
+  - name: jumpbox
+    namespace: jumpbox-system
+    chart: evilgn0me/simple-ssh-bastion
+    version: 0.1.8
+    values:
+      - ./values/jumpbox.yaml
