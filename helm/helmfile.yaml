@@ -29,7 +29,7 @@ releases:
   # SSH Jumpbox
   - name: jumpbox
     namespace: jumpbox-system
-    chart: evilgn0me/simple-ssh-bastion
-    version: 0.1.8
+    chart: k8s-ssh-bastion/k8s-ssh-bastion
+    version: 0.5.4
     values:
       - ./values/jumpbox.yaml
