@@ -20,6 +20,27 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  # Stay up to date
+  system.autoUpgrade.enable = false;
+  systemd.timers."update-nixos" = {
+    wantedBy = [ "timers.target" ];
+    partOf = [ "update-nixos.service" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 03:30:00";
+      Unit = "update-nixos.service";
+    };
+  };
+  systemd.services."update-nixos" = {
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+    path = with pkgs; [ nixos-rebuild ];
+    script = ''
+      nixos-rebuild switch --flake github:NelsonDane/clarkson-nixos-cluster#${meta.hostname}
+    '';
+  };
+
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
