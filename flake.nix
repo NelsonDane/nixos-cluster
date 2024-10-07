@@ -20,6 +20,7 @@
       { name = "cluster-node-3"; ip = "192.168.100.13"; }
       { name = "cluster-node-4"; ip = "192.168.100.14"; }
       { name = "cluster-node-5"; ip = "192.168.100.15"; }
+      { name = "cluster-node-6"; ip = "192.168.100.16"; }
       { name = "cluster-node-7"; ip = "192.168.100.17"; }
       { name = "cluster-node-9"; ip = "192.168.100.19"; }
     ];

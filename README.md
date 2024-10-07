@@ -57,7 +57,7 @@ This will also update secrets on each node.
 
 To pull new changes from the repository without cloning, just run:
 ```bash
-sudo nixos-rebuild switch --flake 'github:NelsonDane/clarkson-nixos-cluster#cluster-node-NUMBER'
+sudo nixos-rebuild switch --flake github:NelsonDane/clarkson-nixos-cluster#cluster-node-NUMBER
 ```
 
 All nodes can ssh into each other using the included `ssh_config`. There is a key located in `.sops.yaml` that is available at `/run/secrets/cluster_talk`.
